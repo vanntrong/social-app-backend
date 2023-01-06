@@ -1,10 +1,10 @@
 name: Run Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
 
 jobs:
 
@@ -21,4 +21,4 @@ jobs:
       run: sudo docker stop social-server || true && sudo docker rm social-server || true
       
     - name: run docker image
-      run: sudo docker run -p 8080:8080/tcp -d -n social-server vovantrong/social-server:main
+      run: sudo docker run -p 8080:8080/tcp -d --name social-server vovantrong/social-server:main
