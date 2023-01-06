@@ -15,13 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: pull docker image
-      run: docker pull vovantrong/social-server:main
+      run: sudo docker pull vovantrong/social-server:main
       
     - name: stop docker container
-      run: docker stop social-server
+      run: sudo docker stop social-server
       
     - name: remove docker container
-      run: docker rm social-server
+      run: sudo docker rm social-server
       
     - name: run docker image
-      run: docker run -p 8080:8080/tcp -d -n social-server vovantrong/social-server:main
+      run: sudo docker run -p 8080:8080/tcp -d -n social-server vovantrong/social-server:main
