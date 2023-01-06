@@ -18,10 +18,7 @@ jobs:
       run: sudo docker pull vovantrong/social-server:main
       
     - name: stop docker container
-      run: sudo docker stop social-server
-      
-    - name: remove docker container
-      run: sudo docker rm social-server
+      run: sudo docker stop social-server || true && sudo docker rm social-server || true
       
     - name: run docker image
       run: sudo docker run -p 8080:8080/tcp -d -n social-server vovantrong/social-server:main
