@@ -1,4 +1,4 @@
-name: Run Docker Image CI
+name: Start Docker Image CI
 
 on:
   workflow_run:
