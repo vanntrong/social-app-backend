@@ -59,7 +59,7 @@ httpServer.listen(PORT, (e) => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://sociala-b253c.web.app"],
+    origin: ["http://46.137.203.198:3000", "https://46.137.203.198:3000"],
   },
 });
 
