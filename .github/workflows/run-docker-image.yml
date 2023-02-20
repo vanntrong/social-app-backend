@@ -15,10 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: pull docker image
-      run: docker pull vovantrong/social-server:main
+      run: sudo docker pull vovantrong/social-server:main
       
     - name: stop docker container
-      run: docker stop social-server || true && docker rm social-server || true
+      run: sudo docker stop social-server || true && sudo docker rm social-server || true
       
     - name: run docker image
-      run: docker run -p 8080:8080/tcp -d --name social-server -e DB_CONNECTION=${{ secrets.DB_CONNECTION }} -e JWT_SECRET=${{secrets.JWT_SECRET}} -e JWT_REFRESH_TOKEN_SECRET=${{secrets.JWT_REFRESH_TOKEN_SECRET}} -e CLOUDINARY_NAME=${{secrets.CLOUDINARY_NAME}} -e CLOUDINARY_API_KEY=${{secrets.CLOUDINARY_API_KEY}} -e CLOUDINARY_API_SECRET=${{secrets.CLOUDINARY_API_SECRET}} -e MAILTRAP_USERNAME=${{secrets.MAILTRAP_USERNAME}} -e MAILTRAP_PASSWORD=${{secrets.MAILTRAP_PASSWORD}} -e PORT=${{secrets.PORT}} -e MODE=${{secrets.MODE}} vovantrong/social-server:main
+      run: sudo docker run -p 8080:8080/tcp -d --name social-server -e DB_CONNECTION=${{ secrets.DB_CONNECTION }} -e JWT_SECRET=${{secrets.JWT_SECRET}} -e JWT_REFRESH_TOKEN_SECRET=${{secrets.JWT_REFRESH_TOKEN_SECRET}} -e CLOUDINARY_NAME=${{secrets.CLOUDINARY_NAME}} -e CLOUDINARY_API_KEY=${{secrets.CLOUDINARY_API_KEY}} -e CLOUDINARY_API_SECRET=${{secrets.CLOUDINARY_API_SECRET}} -e MAILTRAP_USERNAME=${{secrets.MAILTRAP_USERNAME}} -e MAILTRAP_PASSWORD=${{secrets.MAILTRAP_PASSWORD}} -e PORT=${{secrets.PORT}} -e MODE=${{secrets.MODE}} vovantrong/social-server:main
