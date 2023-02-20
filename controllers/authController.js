@@ -12,7 +12,7 @@ export function generateToken(id) {
   };
 
   const options = {
-    expiresIn: "7d",
+    expiresIn: "1m",
   };
 
   return jwt.sign(payload, process.env.JWT_SECRET, options);
@@ -24,7 +24,7 @@ export function generateRefreshToken(id) {
   };
 
   const options = {
-    expiresIn: "20d",
+    expiresIn: "30d",
   };
 
   return jwt.sign(payload, process.env.JWT_REFRESH_TOKEN_SECRET, options);

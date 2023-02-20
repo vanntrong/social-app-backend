@@ -24,7 +24,7 @@ const httpServer = createServer(app);
 //middleware
 app.use(
   cors({
-    origin: ["https://social-app.vovantrong.online"],
+    origin: ["https://social-app.vovantrong.online", "http://localhost:3000"],
   })
 );
 app.use(morgan("short"));
@@ -50,7 +50,7 @@ app.use("/message", messageRoute);
 app.use("/notification", notificationRoute);
 
 mongoose.connect(process.env.DB_CONNECTION, (err) => {
-  if (err) console.log(err);
+  if (err) throw err;
   else {
     console.log("Connected to DB");
   }
@@ -63,7 +63,7 @@ httpServer.listen(PORT, (e) => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://social-app.vovantrong.online"],
+    origin: ["https://social-app.vovantrong.online", "http://localhost:3000"],
   },
 });
 
@@ -88,14 +88,12 @@ const getSocketId = (userId) => {
 
 io.on("connection", (socket) => {
   socket.on("setup", (userId) => {
-    console.log("User connect: ", userId);
     addNewUser(userId, socket.id);
     socket.emit("getOnlineUsers", onlineUsers);
   });
 
   socket.on("join chat", (room) => {
     socket.join(room);
-    console.log("User joined chat: ", room);
   });
 
   socket.on("newMessage", (message, conversation) => {
@@ -155,7 +153,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnect");
     removeUser(socket.id);
     socket.emit("getOnlineUsers", onlineUsers);
   });
