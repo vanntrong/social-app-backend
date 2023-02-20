@@ -24,7 +24,10 @@ const httpServer = createServer(app);
 //middleware
 app.use(
   cors({
-    origin: ["https://social-app.vovantrong.online", "http://localhost:3000"],
+    origin:
+      process.env.MODE === "dev"
+        ? ["http://localhost:3000"]
+        : ["https://social-app.vovantrong.online"],
   })
 );
 app.use(morgan("short"));
@@ -59,11 +62,15 @@ mongoose.connect(process.env.DB_CONNECTION, (err) => {
 httpServer.listen(PORT, (e) => {
   console.log("Server is running on port: ", PORT);
   console.log("Go to / to see the result");
+  console.log({ env: process.env });
 });
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://social-app.vovantrong.online", "http://localhost:3000"],
+    origin:
+      process.env.MODE === "dev"
+        ? ["http://localhost:3000"]
+        : ["https://social-app.vovantrong.online"],
   },
 });
 
