@@ -12,7 +12,7 @@ export function generateToken(id) {
   };
 
   const options = {
-    expiresIn: "1m",
+    expiresIn: "1d",
   };
 
   return jwt.sign(payload, process.env.JWT_SECRET, options);
