@@ -16,7 +16,9 @@ import searchRoute from "./routes/search.js";
 import storyRoute from "./routes/story.js";
 import tokenRoute from "./routes/token.js";
 import usersRoute from "./routes/users.js";
-dotenv.config();
+dotenv.config({
+  path: "./.env",
+});
 const app = express();
 
 const httpServer = createServer(app);
