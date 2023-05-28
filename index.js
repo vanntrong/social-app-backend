@@ -43,6 +43,10 @@ app.get("/", (req, res) => {
   return res.send("Hello from server updated");
 });
 
+app.get("/status", (req, res) => {
+  return res.send("OK!");
+});
+
 app.use("/auth", authRoute);
 app.use("/users", usersRoute);
 app.use("/posts", postRoute);
